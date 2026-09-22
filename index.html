@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You &lt;3</title>
+    <!-- Loads the real Windows 98 CSS components -->
+    <link rel="stylesheet" href="https://unpkg.com">
+    <style>
+        /* Imports the exact VT323 pixel font from Google Fonts */
+        @import url('https://googleapis.com');
+
+        body {
+            /* REPLACE WITH YOUR IMAGE: Put your background image filename here */
+            background-image: url('hintergrund.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: #1a1a1a; /* Dark gray fallback if background image is missing */
+            margin: 0;
+            padding: 20px;
+            font-family: 'VT323', monospace;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* Black Window Styling with White Text */
+        .window {
+            width: 95%;
+            max-width: 420px;
+            font-family: 'VT323', monospace;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.7);
+            background: #000000 !important;
+            border: 2px solid #555555;
+        }
+
+        /* Customizing the 98.css title bar to look dark/black */
+        .title-bar {
+            background: #222222 !important;
+            padding: 4px 6px !important;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .title-bar-text {
+            font-size: 22px;
+            color: #ffffff !important;
+        }
+
+        /* Styling the window action buttons on the right side */
+        .title-bar-controls {
+            display: flex;
+            gap: 2px;
+        }
+
+        .title-bar-controls button {
+            min-width: 18px !important;
+            height: 18px !important;
+            padding: 0 !important;
+            font-size: 12px !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .window-body {
+            font-size: 28px;
+            text-align: center;
+            padding: 25px 20px;
+            color: #ffffff !important;
+            background: #000000 !important;
+            margin: 0 !important;
+        }
+
+        .window-body p {
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+        /* Horizontal Layout: Option buttons placed left and right */
+        .options-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            flex-direction: row !important; /* Forces side-by-side positioning */
+            flex-wrap: nowrap; 
+        }
+
+        /* Stylized buttons to match the black and white pixel aesthetic */
+        button {
+            font-family: 'VT323', monospace !important;
+            font-size: 24px !important;
+            flex: 1; /* Gives buttons equal width side-by-side */
+            max-width: 160px;
+            min-width: 80px;
+            cursor: pointer;
+            padding: 6px 12px !important;
+            background: #222222 !important;
+            color: #ffffff !important;
+            border: 2px solid #555555 !important;
+            box-shadow: inset 1px 1px #777777, 2px 2px #000000;
+        }
+
+        button:active:not(:disabled) {
+            box-shadow: inset -1px -1px #777777, inset 1px 1px #000000;
+            padding: 7px 11px 5px 13px !important;
+        }
+
+        /* Disabled buttons maintain pixel style but indicate they are unclickable */
+        button:disabled {
+            cursor: not-allowed;
+            opacity: 0.4;
+            background: #111111 !important;
+            color: #555555 !important;
+            border-color: #333333 !important;
+            box-shadow: none !important;
+        }
+    </style>
+</head>
+<body>
+
+<div id="game-container"></div>
+
+<script>
+// Your complete routing and text structure
+const steps = {
+    start: {
+        title: "Question.exe",
+        text: "will u be my boyfriend?",
+        options: [
+            { text: "YES", next: "route1_0" },
+            { text: "Noooo", next: "no_1" }
+        ]
+    },
+    // --- ROUTE 1.0 (START) ---
+    route1_0: {
+        title: "Question.exe",
+        text: "Checking data...",
+        options: [
+            { text: "REALLY???", next: "boyfriends_now" }
+        ]
+    },
+    boyfriends_now: {
+        title: "Success.exe",
+        text: "WE RE BOYFRIENDS NOW.",
+        options: [
+            { text: "yesss ily", next: "ily_too" }
+        ]
+    },
+    ily_too: {
+        title: "Love.exe",
+        text: "ILY TOO<3",
+        options: [
+            { text: "ILY MORE LETS MARRY", next: "marrying_already" },
+            { text: "what the left Option says", next: "marrying_already" }
+        ]
+    },
+    marrying_already: {
+        title: "Shy.exe",
+        text: "marrying already? im gonna get all shy now..",
+        options: [
+            { text: "you re so so cute baby", next: "so_are_you" },
+            { text: "you re adorable omg baby", next: "so_are_you" }
+        ]
+    },
+    so_are_you: {
+        title: "Cute.exe",
+        text: "REALLYY? so are youuuuuu",
+        options: [
+            { text: "ouu shii me?", next: "yes_you" }
+        ]
+    },
+    yes_you: {
+        title: "Wink.exe",
+        text: "yessss youuuu winkwink.",
+        options: [
+            { text: "gulp", next: "pixel_or_real" }
+        ]
+    },
+    pixel_or_real: {
+        title: "Choice.exe",
+        text: "do u like Pixel me or real me more",
+        options: [
+            { text: "real u ofc", next: "screaming" },
+            { text: "im gonna listen to all of your fav NOT boring songs", next: "songs_react" }
+        ]
+    },
+    screaming: {
+        title: "AAAAH.exe",
+        text: "YOURE SO CUTE AAAAAAAAAAAAAAAAAAAAAH",
+        options: [
+            { text: "...", next: "end_1" }
+        ]
+    },
+    end_1: {
+        title: "Bye.exe",
+        text: "OK byee ily",
+        options: [] // End 1
+    },
+    songs_react: {
+        title: "Surprise.exe",
+        text: "youre gonna listen to my fav Songs?????",
+        options: [
+            { text: "yes cuz ilysm", next: "end_2" }
+        ]
+    },
+    end_2: {
+        title: "Yippiee.exe",
+        text: "YIPPIEE OK byee ily.",
+        options: [] // End 2
+    },
+    // --- NO-ROUTE BRANCHES ---
+    no_1: {
+        title: "ThinkAgain.exe",
+        text: "Are you absolutely sure?",
+        options: [
+            { text: "JK yes i will", next: "route1_0" },
+            { text: "No (lie)", next: "no_lie" }
+        ]
+    },
+    no_lie: {
+        title: "Instruction.exe",
+        text: "klick on the Right option.",
+        options: [
+            { text: "thats the left option haha", disabled: true },
+            { text: "lets get married", next: "good_boy" }
+        ]
+    },
+    good_boy: {
+        title: "Gotcha.exe",
+        text: "GOOD BOY HAHA. we re Boyfriends now.",
+        options: [
+            { text: "yes", next: "route1_0" },
+            { text: "Nope", disabled: true },
+            { text: "YIPPIE", next: "yippie_option" }
+        ]
+    },
+    yippie_option: {
+        title: "Caught.exe",
+        text: "YOU CHOSE THE YIPPIE OPTION NAW U LOVE MEEE",
+        options: [
+            { text: "YES ILYSM", next: "route1_0" },
+            { text: "THE LEFT OPTION hehe", next: "route1_0" }
+        ]
+    }
+};
+
+function renderStep(stepKey) {
+    const container = document.getElementById('game-container');
+    const data = steps[stepKey];
+
+    let optionsHtml = '';
+    data.options.forEach(opt => {
+        if (opt.disabled) {
+            optionsHtml += `<button disabled>${opt.text}</button>`;
+        } else {
+            optionsHtml += `<button onclick="renderStep('${opt.next}')">${opt.text}</button>`;
+        }
+    });
+
+    container.innerHTML = `
+        <div class="window">
+            <div class="title-bar">
+                <div class="title-bar-text">${data.title}</div>
+                <div class="title-bar-controls">
+                    <button aria-label="Minimize"></button>
+                    <button aria-label="Maximize"></button>
+                    <button aria-label="Close" onclick="alert('You cannot close this window! ❤️')"></button>
+                </div>
+            </div>
+            <div class="window-body">
+                <p>${data.text}</p>
+                <div class="options-container">
+                    ${optionsHtml}
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Launches the application
+renderStep('start');
+</script>
+
+</body>
+</html>
