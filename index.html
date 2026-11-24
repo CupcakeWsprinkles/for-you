@@ -364,4 +364,14 @@
 
       const opts = scene.getOptions ? scene.getOptions() : scene.options;
       if (opts && opts.length > 0) {
+      win.appendChild(titleBar);
+      win.appendChild(body);
+      app.appendChild(win);
+    }
+
+    // Startet die erste Szene
+    renderScene('start');
+  </script>
+</body>
+</html>
 
