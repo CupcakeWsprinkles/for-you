@@ -33,7 +33,7 @@
     .window {
       width: 100%;
       max-width: 420px;
-      background-color: #fff0f6;
+      background-color: rgba(255, 240, 246, 0.75);
       border: 3px solid #2b2b2b;
       border-radius: 14px;
       box-shadow: 6px 6px 0px #2b2b2b;
@@ -301,7 +301,7 @@
       // Weg 2,0 (Finale)
       r2_0: {
         isFinal: true,
-        text: "deer Emil, i wish u a great super duper birthday. youre so awesome and kind and funni and aura and stuff and im realli happi that we know each other. today is ur special day and i hope u celebrate it well !!!! i wish i could give u an actual gift not a digital thing i coded :sob: but i hope u like this too ! you is kind you is important and sososoosososososo cool. insert bears hugging and like biting each other sticker.",
+        text: "deer Emil, i wish u a great super duper birthday. youre so awesome and kind and funni and aura and stuff and im realli happi that we know each other. today is ur special day and i hope u enjoy it as much as u can. have an amazing birthday!!!",
         options: []
       }
     };
@@ -364,3 +364,34 @@
 
       const opts = scene.getOptions ? scene.getOptions() : scene.options;
       if (opts && opts.length > 0) {
+        const optionsContainer = document.createElement('div');
+        optionsContainer.className = 'options-container';
+
+        opts.forEach(option => {
+          const button = document.createElement('button');
+          button.className = 'btn';
+          button.textContent = option.label;
+
+          if (option.disabled) {
+            button.disabled = true;
+            button.classList.add('disabled');
+          } else {
+            button.onclick = option.action || (() => renderScene(option.next));
+          }
+
+          optionsContainer.appendChild(button);
+        });
+
+        body.appendChild(optionsContainer);
+      }
+
+      win.appendChild(titleBar);
+      win.appendChild(body);
+      app.appendChild(win);
+    }
+
+    renderScene('start');
+  </script>
+
+</body>
+</html>
